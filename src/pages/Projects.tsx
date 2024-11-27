@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-
 interface Project {
   id: number;
   title: string;
@@ -23,19 +22,41 @@ const projects: Project[] = [
 ];
 
 const Projects = () => {
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1
+  });
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: 0.2 }}
-      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-    >
-      {projects.map((project, index) => (
-        <ProjectCard key={project.id} project={project} index={index} />
-      ))}
-    </motion.div>
-  )
+    <section className="py-20 bg-gray-50">
+      <motion.div
+        ref={ref}
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+        variants={containerVariants}
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+      >
+        
+
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {projects.map((project, index) => (
+            <ProjectCard key={project.id} project={project} index={index} />
+          ))}
+        </div>
+      </motion.div>
+    </section>
+  );
 }
 
 const ProjectCard = ({ project, index }: { project: Project; index: number }) => {

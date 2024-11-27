@@ -19,13 +19,7 @@ const Home = () => {
       className="w-full min-h-screen overflow-x-hidden"
     >
       {/* Hero Section */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <Hero />
-      </motion.div>
+      <Hero />
       
       {/* Projects Section */}
       <motion.div
