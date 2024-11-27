@@ -8,8 +8,8 @@ const Logo = () => {
       pathLength: 1,
       opacity: 1,
       transition: {
-        duration: 1,
-        ease: "easeInOut"
+        duration: 1.4,
+        ease: "easeOut"
       }
     }
   }
@@ -17,44 +17,56 @@ const Logo = () => {
   return (
     <motion.div
       whileHover={{ scale: 1.05 }}
-      className="relative w-10 h-10"
+      className="relative w-14 h-12"
     >
       <Link to="/" className="block">
         <motion.svg
-          viewBox="0 0 50 50"
+          viewBox="0 0 120 100"
           className="w-full h-full"
           initial="hidden"
           animate="visible"
         >
-          {/* Hexagon Background */}
+          {/* Main flowing line forming V and connecting to K */}
           <motion.path
-            d="M25 5 L45 15 L45 35 L25 45 L5 35 L5 15 Z"
-            className="fill-indigo-50"
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.4 }}
-          />
-          
-          {/* V Letter */}
-          <motion.path
-            d="M15 15 L25 35 L35 15"
-            className="stroke-indigo-400"
-            strokeWidth="3"
+            d="M20 20 
+                L40 80 
+                L60 20
+                L60 80"
+            className="stroke-indigo-500"
+            strokeWidth="8"
             strokeLinecap="round"
             strokeLinejoin="round"
             fill="none"
             variants={pathVariants}
           />
-          
-          {/* Decorative Lines */}
+
+          {/* K's diagonal strokes flowing into B */}
           <motion.path
-            d="M10 25 L15 25 M35 25 L40 25"
-            className="stroke-indigo-200"
-            strokeWidth="2"
+            d="M60 50 
+                L85 20
+                C95 20, 95 35, 95 35
+                M60 50
+                L85 80
+                C95 80, 95 65, 95 65"
+            className="stroke-indigo-400"
+            strokeWidth="8"
             strokeLinecap="round"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1 }}
+            strokeLinejoin="round"
+            fill="none"
+            variants={pathVariants}
+          />
+
+          {/* B's central curve */}
+          <motion.path
+            d="M95 35
+               C115 35, 115 50, 95 50
+               C115 50, 115 65, 95 65"
+            className="stroke-indigo-400"
+            strokeWidth="8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            fill="none"
+            variants={pathVariants}
           />
         </motion.svg>
       </Link>

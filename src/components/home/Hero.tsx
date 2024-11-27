@@ -59,13 +59,37 @@ const Hero = () => {
     }
   }
 
+  const letterVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        delay: 0.3 + i * 0.1
+      }
+    })
+  }
+
+  const name = "Venkat".split("")
+
   return (
-    <section className="min-h-screen flex items-center justify-center bg-white w-full py-20">
+    <section className="relative min-h-screen flex items-center justify-center w-full py-20 overflow-hidden">
+      {/* Geometric Shapes */}
+      <div className="absolute inset-0">
+        <div className="absolute top-20 left-10 w-16 h-16 border-4 border-indigo-200 rounded-full animate-spin-slow" />
+        <div className="absolute top-40 right-20 w-20 h-20 border-4 border-pink-200 rotate-45" />
+        <div className="absolute bottom-40 left-1/4 w-12 h-12 bg-yellow-100/50" />
+        <div className="absolute top-1/3 right-1/3 w-14 h-14 border-4 border-purple-200 rounded-full" />
+        <div className="absolute bottom-20 right-20 w-16 h-16 border-4 border-indigo-200 rotate-12" />
+        <div className="absolute top-1/2 left-20 w-10 h-10 bg-indigo-100/50 rotate-45" />
+      </div>
+
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible" 
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
       >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Column - Text Content */}
@@ -74,7 +98,26 @@ const Hero = () => {
               variants={itemVariants}
               className="text-5xl md:text-7xl font-bold text-gray-800"
             >
-              Hi, I'm <span className="text-indigo-400">Venkat</span>
+              Hi, I'm{" "}
+              <span className="inline-block">
+                {name.map((letter, i) => (
+                  <motion.span
+                    key={i}
+                    custom={i}
+                    variants={letterVariants}
+                    initial="hidden"
+                    animate="visible"
+                    className="inline-block text-indigo-400 hover:text-indigo-600 transition-colors cursor-default"
+                    whileHover={{ 
+                      scale: 1.2, 
+                      rotate: [-5, 5, 0],
+                      transition: { duration: 0.3 }
+                    }}
+                  >
+                    {letter}
+                  </motion.span>
+                ))}
+              </span>
             </motion.h1>
             
             <motion.p 
@@ -135,6 +178,29 @@ const Hero = () => {
             className="relative order-first lg:order-last"
           >
             <div className="relative w-full aspect-square max-w-md mx-auto">
+              {/* Animated bubbles */}
+              {[...Array(8)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className={`absolute w-${Math.random() * 8 + 4} h-${Math.random() * 8 + 4} rounded-full bg-indigo-${100 + i * 100} opacity-40`}
+                  style={{
+                    top: `${Math.random() * 100}%`,
+                    left: `${Math.random() * 100}%`,
+                  }}
+                  animate={{
+                    y: [-20, 20, -20],
+                    x: [-10, 10, -10],
+                    scale: [1, 1.1, 1],
+                  }}
+                  transition={{
+                    duration: 3 + i,
+                    repeat: Infinity,
+                    repeatType: "reverse",
+                    ease: "easeInOut",
+                  }}
+                />
+              ))}
+              
               {/* Multiple layered shadows for depth */}
               <div className="absolute inset-0 bg-indigo-200 rounded-full blur-2xl opacity-20 scale-110 transform rotate-12" />
               <div className="absolute inset-0 bg-blue-200 rounded-full blur-2xl opacity-20 scale-105 transform -rotate-6" />
@@ -159,37 +225,25 @@ const Hero = () => {
                 />
               </motion.div>
             </div>
-            
-            {/* Decorative Elements */}
-            <motion.div
-              className="absolute -z-10 w-72 h-72 bg-gradient-to-br from-indigo-50 to-white rounded-full -top-10 -right-10"
-              animate={{
-                scale: [1, 1.05, 1],
-                rotate: [0, 5, 0],
-                opacity: [0.5, 0.7, 0.5]
-              }}
-              transition={{
-                duration: 8,
-                repeat: Infinity,
-                repeatType: "reverse"
-              }}
-            />
-            <motion.div
-              className="absolute -z-10 w-48 h-48 bg-gradient-to-tr from-blue-50 to-white rounded-full -bottom-10 -left-10"
-              animate={{
-                scale: [1, 1.05, 1],
-                rotate: [0, -5, 0],
-                opacity: [0.5, 0.7, 0.5]
-              }}
-              transition={{
-                duration: 6,
-                repeat: Infinity,
-                repeatType: "reverse"
-              }}
-            />
           </motion.div>
         </div>
       </motion.div>
+
+      {/* Add this to your CSS */}
+      <style>{`
+        @keyframes spin-slow {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+
+        .animate-spin-slow {
+          animation: spin-slow 20s linear infinite;
+        }
+      `}</style>
     </section>
   )
 }
