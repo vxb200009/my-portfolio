@@ -2,8 +2,10 @@ import { motion } from 'framer-motion'
 import Hero from '../components/home/Hero'
 import Projects from './Projects'
 
+import '../styles/patterns.css'
+import Skills from '../components/skills/Skills'
+
 const Home = () => {
-  // Page transition variants
   const pageVariants = {
     initial: { opacity: 0 },
     animate: { opacity: 1 },
@@ -16,99 +18,57 @@ const Home = () => {
       initial="initial"
       animate="animate"
       exit="exit"
-      className="w-full min-h-screen overflow-x-hidden"
+      className="w-full min-h-screen overflow-x-hidden bg-gray-50/30"
     >
-      {/* Hero Section */}
-      <Hero />
-      
-      {/* Projects Section */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="relative"
-      >
-        {/* Wave Divider */}
-        <div className="absolute top-0 left-0 w-full overflow-hidden leading-[0] rotate-180">
-          <svg 
-            data-name="Layer 1" 
-            xmlns="http://www.w3.org/2000/svg" 
-            viewBox="0 0 1200 120" 
-            preserveAspectRatio="none"
-            className="relative block w-full h-[100px]"
-          >
-            <path 
-              d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" 
-              className="fill-gray-50"
-            ></path>
-          </svg>
-        </div>
+      {/* Subtle Background Pattern */}
+      <div className="fixed inset-0 z-0 opacity-[0.02]">
+        <div className="absolute inset-0 bg-repeat pattern-grid-gray/10" />
+      </div>
 
-        <div className="bg-gray-50 pt-24 pb-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {/* Projects Header */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-16"
-            >
-              <motion.div
-                initial={{ width: 0 }}
-                whileInView={{ width: "100%" }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="overflow-hidden"
-              >
-                <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">
-                  Featured Projects
-                </h2>
-              </motion.div>
-              
-              <motion.div
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-                className="flex justify-center mt-4"
-              >
-                <div className="h-1 w-24 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-full" />
-              </motion.div>
-
-              <motion.p
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.6 }}
-                className="mt-6 text-lg text-gray-600 max-w-2xl mx-auto"
-              >
-                Explore my latest works and creative experiments
-              </motion.p>
-            </motion.div>
-
-            {/* Projects Grid */}
-            <Projects />
+      {/* Content Container */}
+      <div className="relative z-10">
+        {/* Hero Section */}
+        <div className="relative">
+          <Hero />
+          {/* Curved Divider */}
+          <div className="absolute bottom-0 left-0 w-full overflow-hidden transform translate-y-1/2">
+            <svg className="relative w-full h-24 md:h-32" viewBox="0 0 1440 100" preserveAspectRatio="none">
+              <path 
+                d="M0,0 C480,100 960,100 1440,0 L1440,100 L0,100 Z" 
+                className="fill-gray-50/50"
+              />
+            </svg>
           </div>
         </div>
 
-        {/* Bottom Wave */}
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0]">
-          <svg 
-            data-name="Layer 1" 
-            xmlns="http://www.w3.org/2000/svg" 
-            viewBox="0 0 1200 120" 
-            preserveAspectRatio="none"
-            className="relative block w-full h-[100px]"
-          >
-            <path 
-              d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" 
-              className="fill-white"
-            ></path>
-          </svg>
+        {/* Projects Section */}
+        <motion.div className="relative py-20">
+          <Projects />
+          {/* Wave Divider */}
+          <div className="absolute bottom-0 left-0 w-full overflow-hidden transform translate-y-1/2">
+            <svg className="relative w-full h-24 md:h-32" viewBox="0 0 1440 100" preserveAspectRatio="none">
+              <path 
+                d="M0,40 C320,20 480,80 720,60 C960,40 1120,80 1440,60 L1440,100 L0,100 Z" 
+                className="fill-gray-50"
+              />
+            </svg>
+          </div>
+        </motion.div>
+
+        {/* Skills Section */}
+        <div className="relative py-20 bg-gray-50">
+          <Skills />
+          {/* Diagonal Dots Divider */}
+          <div className="absolute bottom-0 left-0 w-full overflow-hidden">
+            <svg className="relative w-full h-24" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <pattern id="dots" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
+                <circle cx="5" cy="5" r="1" className="fill-gray-200" />
+              </pattern>
+              <path d="M0,0 L100,100 L0,100 Z" fill="url(#dots)" />
+            </svg>
+          </div>
         </div>
-      </motion.div>
+      </div>
     </motion.div>
   )
 }

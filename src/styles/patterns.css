@@ -1,0 +1,20 @@
+.pattern-grid-gray {
+  background-image: radial-gradient(circle at 1px 1px, #4B5563 1px, transparent 0);
+  background-size: 40px 40px;
+} 
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+.floating {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Add subtle parallax effect on scroll */
+.parallax {
+  transform: translateY(var(--scroll-offset, 0));
+  transition: transform 0.1s ease-out;
+} 

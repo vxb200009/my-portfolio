@@ -22,38 +22,75 @@ const projects: Project[] = [
 ];
 
 const Projects = () => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1
-  });
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  };
-
   return (
-      <motion.div
-        ref={ref}
-        initial="hidden"
-        animate={inView ? "visible" : "hidden"}
-        variants={containerVariants}
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
-      >
-        
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Creative Header */}
+      <div className="text-center mb-16">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="relative inline-block"
+        >
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ 
+              duration: 0.8,
+              type: "spring",
+              stiffness: 100 
+            }}
+            className="text-5xl font-bold text-gray-900 mb-4"
+          >
+            Featured Projects
+            <motion.span
+              initial={{ width: "0%" }}
+              whileInView={{ width: "100%" }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+              className="absolute bottom-0 left-0 h-1 bg-blue-500/30"
+            />
+          </motion.h2>
+          
+          {/* Decorative Elements */}
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="absolute -right-8 -top-8 text-blue-500/20"
+          >
+            <svg className="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </motion.div>
+        </motion.div>
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} />
-          ))}
-        </div>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className="text-lg text-gray-600 max-w-2xl mx-auto mt-4"
+        >
+          A collection of my recent work and personal projects
+        </motion.p>
+      </div>
+
+      {/* Projects Grid */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+      >
+        {projects.map((project, index) => (
+          <ProjectCard key={project.id} project={project} index={index} />
+        ))}
       </motion.div>
+    </div>
   );
 }
 
