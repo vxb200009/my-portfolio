@@ -42,21 +42,21 @@ const Home = () => {
         </div>
 
         {/* Projects Section */}
-        <motion.div className="relative py-20">
+        <motion.div className="relative py-2">
           <Projects />
           {/* Wave Divider */}
-          <div className="absolute bottom-0 left-0 w-full overflow-hidden transform translate-y-1/2">
+          {/* <div className="absolute bottom-0 left-0 w-full overflow-hidden transform translate-y-1/2">
             <svg className="relative w-full h-24 md:h-32" viewBox="0 0 1440 100" preserveAspectRatio="none">
               <path 
                 d="M0,40 C320,20 480,80 720,60 C960,40 1120,80 1440,60 L1440,100 L0,100 Z" 
                 className="fill-gray-50"
               />
             </svg>
-          </div>
+          </div> */}
         </motion.div>
 
         {/* Skills Section */}
-        <div className="relative py-20 bg-gray-50">
+        <div className="relative  bg-gray-50">
           <Skills />
           {/* Diagonal Dots Divider */}
           <div className="absolute bottom-0 left-0 w-full overflow-hidden">
