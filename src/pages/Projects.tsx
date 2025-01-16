@@ -1,8 +1,10 @@
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import ProjectDetails from '../components/ProjectDetails'
+import { projectsData } from '../data/projectContents';
 
-interface Project {
+export interface Project {
   id: number;
   title: string;
   description: string;
@@ -11,53 +13,10 @@ interface Project {
   link: string;
 }
 
-const projects: Project[] = [
-  {
-    id: 1,
-    title: "Project One",
-    description: "A brief description of project one and its key features.",
-    image: "/path-to-image1.jpg",
-    tech: ["React", "TypeScript", "Tailwind"],
-    link: "https://project-one.com"
-  },
-  {
-    id: 2,
-    title: "Project Two",
-    description: "An innovative solution with cutting-edge technologies.",
-    image: "/path-to-image2.jpg",
-    tech: ["Next.js", "GraphQL", "Node.js"],
-    link: "https://project-two.com"
-  },
-  {
-    id: 3,
-    title: "Project Three",
-    description: "A scalable and performant application for enterprise needs.",
-    image: "/path-to-image3.jpg",
-    tech: ["React", "AWS", "MongoDB"],
-    link: "https://project-three.com"
-  },
-  {
-    id: 4,
-    title: "Project Four",
-    description: "Modern e-commerce solution with advanced features.",
-    image: "/path-to-image4.jpg",
-    tech: ["Vue.js", "Firebase", "Stripe"],
-    link: "https://project-four.com"
-  },
-  {
-    id: 5,
-    title: "Project Five",
-    description: "Real-time collaboration platform for remote teams.",
-    image: "/path-to-image5.jpg",
-    tech: ["Socket.io", "Redis", "Express"],
-    link: "https://project-five.com"
-  }
-];
-
 const Projects = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const projectsPerPage = 3;
-  const totalPages = Math.ceil(projects.length / projectsPerPage);
+  const totalPages = Math.ceil(projectsData.length / projectsPerPage);
 
   const nextPage = () => {
     setCurrentPage((prev) => (prev + 1) % totalPages);
@@ -161,7 +120,7 @@ const Projects = () => {
                   transition={{ duration: 0.5 }}
                   className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
                 >
-                  {projects
+                  {projectsData
                     .slice(
                       currentPage * projectsPerPage,
                       (currentPage + 1) * projectsPerPage
@@ -201,6 +160,7 @@ const Projects = () => {
 };
 
 const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: cardRef,
@@ -211,100 +171,109 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
   const opacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
 
   return (
-    <motion.div
-      ref={cardRef}
-      style={{ scale, opacity }}
-      className="group relative"
-    >
+    <>
       <motion.div
-        initial={{ y: 60 }}
-        animate={{ y: 0 }}
-        transition={{ 
-          duration: 0.8,
-          delay: index * 0.2,
-          type: "spring",
-          stiffness: 100
-        }}
-        className="relative h-[500px] rounded-2xl overflow-hidden shadow-lg border border-gray-100"
+        ref={cardRef}
+        style={{ scale, opacity }}
+        className="group relative cursor-pointer"
+        onClick={() => setIsDetailsOpen(true)}
       >
-        {/* Glass Background */}
-        <div className="absolute inset-0 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl 
-                      group-hover:bg-white/20 transition-all duration-300" />
+        <motion.div
+          initial={{ y: 60 }}
+          animate={{ y: 0 }}
+          transition={{ duration: 0.8, delay: index * 0.2, type: "spring", stiffness: 100 }}
+          className="relative h-[500px] rounded-2xl overflow-hidden shadow-lg border border-gray-100"
+        >
+          {/* Glass Background */}
+          <div className="absolute inset-0 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl 
+                        group-hover:bg-white/20 transition-all duration-300" />
 
-        {/* Project Image */}
-        <div className="relative h-1/2 overflow-hidden">
-          <motion.img
-            whileHover={{ scale: 1.1 }}
-            transition={{ duration: 0.4 }}
-            src={project.image}
-            alt={project.title}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/10" />
-        </div>
-
-        {/* Content */}
-        <div className="relative p-6">
-          <motion.h3 
-            className="text-xl font-bold text-gray-900 mb-2"
-            whileHover={{ x: 10 }}
-          >
-            {project.title}
-          </motion.h3>
-          <p className="text-gray-600 mb-4 line-clamp-2">
-            {project.description}
-          </p>
-
-          {/* Tech Stack */}
-          <div className="flex flex-wrap gap-2 mb-4">
-            {project.tech.map((tech, idx) => (
-              <motion.span
-                key={idx}
-                whileHover={{ scale: 1.1 }}
-                className="px-3 py-1 text-sm bg-indigo-100/50 text-indigo-600 rounded-full"
-              >
-                {tech}
-              </motion.span>
-            ))}
+          {/* Project Image */}
+          <div className="relative h-2/5 overflow-hidden">
+            <motion.img
+              whileHover={{ scale: 1.1 }}
+              transition={{ duration: 0.4 }}
+              src={project.image}
+              alt={project.title}
+              className="w-full h-full object-contain"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/10" />
           </div>
 
-          {/* Link Button */}
-          <motion.a
-            href={project.link}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-500
-                     text-white rounded-lg hover:from-indigo-600 hover:to-purple-600 transition-all"
-          >
-            View Project
-            <motion.svg
-              className="ml-2 w-5 h-5"
-              whileHover={{ x: 5 }}
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+          {/* Content */}
+          <div className="relative p-6 h-3/5 flex flex-col">
+            <motion.h3 
+              className="text-xl font-bold text-gray-900 mb-2 truncate"
+              whileHover={{ x: 10 }}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M14 5l7 7m0 0l-7 7m7-7H3"
-              />
-            </motion.svg>
-          </motion.a>
-        </div>
+              {project.title}
+            </motion.h3>
+            <p className="text-gray-600 mb-4 line-clamp-3 text-sm flex-grow">
+              {project.description}
+            </p>
 
-        {/* Hover Effects */}
-        <motion.div
-          className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100
-                     border-2 border-transparent group-hover:border-indigo-500/20
-                     transition-all duration-300"
-          whileHover={{
-            boxShadow: "0 0 30px rgba(99, 102, 241, 0.2)"
-          }}
-        />
+            {/* Tech Stack */}
+            <div className="flex flex-wrap gap-1.5 mb-4">
+              {project.tech.slice(0, 5).map((tech, idx) => (
+                <motion.span
+                  key={idx}
+                  whileHover={{ scale: 1.1 }}
+                  className="px-2 py-0.5 text-xs bg-indigo-100/50 text-indigo-600 rounded-full"
+                >
+                  {tech}
+                </motion.span>
+              ))}
+              {project.tech.length > 5 && (
+                <span className="px-2 py-0.5 text-xs text-gray-500">
+                  +{project.tech.length - 5} more
+                </span>
+              )}
+            </div>
+
+            {/* Link Button */}
+            <motion.a
+              href={project.link}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex items-center px-3 py-1.5 text-sm bg-gradient-to-r from-indigo-500 to-purple-500
+                      text-white rounded-lg hover:from-indigo-600 hover:to-purple-600 transition-all"
+            >
+              View Project
+              <motion.svg
+                className="ml-2 w-4 h-4"
+                whileHover={{ x: 5 }}
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                />
+              </motion.svg>
+            </motion.a>
+          </div>
+
+          {/* Hover Effects */}
+          <motion.div
+            className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100
+                       border-2 border-transparent group-hover:border-indigo-500/20
+                       transition-all duration-300"
+            whileHover={{
+              boxShadow: "0 0 30px rgba(99, 102, 241, 0.2)"
+            }}
+          />
+        </motion.div>
       </motion.div>
-    </motion.div>
+
+      <ProjectDetails 
+        project={project}
+        isOpen={isDetailsOpen}
+        onClose={() => setIsDetailsOpen(false)}
+      />
+    </>
   );
 };
 
