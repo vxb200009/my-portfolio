@@ -3,6 +3,7 @@ import { Project } from '../pages/Projects';
 import { FiX, FiExternalLink, FiCode, FiLayers, FiShield, FiGithub } from 'react-icons/fi';
 import { HiOutlineSparkles } from 'react-icons/hi';
 import { getProjectByTitle } from '../data/projectContents';
+import { useEffect } from 'react';
 
 interface ProjectDetailsProps {
   project: Project;
@@ -124,6 +125,22 @@ const ScrollShapes = () => {
 const ProjectDetails = ({ project, isOpen, onClose }: ProjectDetailsProps) => {
   const projectData = getProjectByTitle(project.title);
   
+  // Add effect to handle body scroll
+  useEffect(() => {
+    if (isOpen) {
+      // Disable scrolling on the background
+      document.body.style.overflow = 'hidden';
+    } else {
+      // Re-enable scrolling when modal is closed
+      document.body.style.overflow = 'unset';
+    }
+
+    // Cleanup function to re-enable scrolling when component unmounts
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
   if (!projectData) return null;
 
   const sections = projectData.sections;
@@ -176,7 +193,8 @@ const ProjectDetails = ({ project, isOpen, onClose }: ProjectDetailsProps) => {
             className="fixed inset-x-0 bottom-0 h-[90vh] bg-white/95 backdrop-blur-md z-50 
                      rounded-t-[2rem] shadow-xl border-t border-gray-100"
           >
-            <div className="h-full overflow-y-auto">
+            <div className="h-full overflow-y-auto scroll-smooth scrollbar-thin 
+                          scrollbar-thumb-gray-300 scrollbar-track-transparent">
               {/* Pull indicator */}
               <div className="flex justify-center pt-4">
                 <div className="w-12 h-1.5 bg-gray-300 dark:bg-gray-700 rounded-full" />

@@ -175,96 +175,63 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
       <motion.div
         ref={cardRef}
         style={{ scale, opacity }}
-        className="group relative cursor-pointer"
-        onClick={() => setIsDetailsOpen(true)}
+        className="relative"
       >
         <motion.div
           initial={{ y: 60 }}
           animate={{ y: 0 }}
           transition={{ duration: 0.8, delay: index * 0.2, type: "spring", stiffness: 100 }}
-          className="relative h-[500px] rounded-2xl overflow-hidden shadow-lg border border-gray-100"
+          className="relative h-[500px] rounded-2xl overflow-hidden shadow-lg border border-gray-100 
+                   bg-white backdrop-blur-sm"
         >
-          {/* Glass Background */}
-          <div className="absolute inset-0 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl 
-                        group-hover:bg-white/20 transition-all duration-300" />
-
           {/* Project Image */}
-          <div className="relative h-2/5 overflow-hidden">
-            <motion.img
-              whileHover={{ scale: 1.1 }}
-              transition={{ duration: 0.4 }}
+          <div className="relative h-2/5 overflow-hidden bg-gradient-to-br from-gray-50 to-white">
+            <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5" />
+            <img
               src={project.image}
               alt={project.title}
-              className="w-full h-full object-contain"
+              className="w-full h-full object-cover p-4 opacity-95"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent" />
           </div>
 
           {/* Content */}
           <div className="relative p-6 h-3/5 flex flex-col">
-            <motion.h3 
-              className="text-xl font-bold text-gray-900 mb-2 truncate"
-              whileHover={{ x: 10 }}
-            >
+            <h3 className="text-xl font-bold text-gray-900 mb-2 truncate">
               {project.title}
-            </motion.h3>
-            <p className="text-gray-600 mb-4 line-clamp-3 text-sm flex-grow">
+            </h3>
+            <p className="text-gray-600 mb-4 line-clamp-4 text-sm flex-grow">
               {project.description}
             </p>
 
             {/* Tech Stack */}
-            <div className="flex flex-wrap gap-1.5 mb-4">
-              {project.tech.slice(0, 5).map((tech, idx) => (
-                <motion.span
+            <div className="flex flex-wrap gap-1.5 mb-6">
+              {project.tech.slice(0, 4).map((tech, idx) => (
+                <span
                   key={idx}
-                  whileHover={{ scale: 1.1 }}
-                  className="px-2 py-0.5 text-xs bg-indigo-100/50 text-indigo-600 rounded-full"
+                  className="px-2 py-0.5 text-xs font-medium bg-indigo-50 
+                         text-indigo-600 rounded-full border border-indigo-100/50"
                 >
                   {tech}
-                </motion.span>
+                </span>
               ))}
-              {project.tech.length > 5 && (
+              {project.tech.length > 4 && (
                 <span className="px-2 py-0.5 text-xs text-gray-500">
-                  +{project.tech.length - 5} more
+                  +{project.tech.length - 4} more
                 </span>
               )}
             </div>
 
-            {/* Link Button */}
-            <motion.a
-              href={project.link}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center px-3 py-1.5 text-sm bg-gradient-to-r from-indigo-500 to-purple-500
-                      text-white rounded-lg hover:from-indigo-600 hover:to-purple-600 transition-all"
+            {/* View Details Button */}
+            <motion.button
+              onClick={() => setIsDetailsOpen(true)}
+              whileTap={{ scale: 0.98 }}
+              className="w-full px-4 py-2.5 bg-gradient-to-r from-indigo-500 to-purple-500 
+                     text-white rounded-xl font-medium shadow-md text-sm"
             >
-              View Project
-              <motion.svg
-                className="ml-2 w-4 h-4"
-                whileHover={{ x: 5 }}
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M14 5l7 7m0 0l-7 7m7-7H3"
-                />
-              </motion.svg>
-            </motion.a>
+              View Details
+            </motion.button>
           </div>
-
-          {/* Hover Effects */}
-          <motion.div
-            className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100
-                       border-2 border-transparent group-hover:border-indigo-500/20
-                       transition-all duration-300"
-            whileHover={{
-              boxShadow: "0 0 30px rgba(99, 102, 241, 0.2)"
-            }}
-          />
         </motion.div>
       </motion.div>
 

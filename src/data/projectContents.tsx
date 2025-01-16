@@ -30,7 +30,7 @@ export const projectsData: ProjectContent[] = [
   {
     id: 1,
     title: "MetaJungle",
-    description: "MetaJungle is a comprehensive platform designed to facilitate the buying, selling, and trading of digital assets, specifically NFTs (Non-Fungible Tokens). The platform aims to provide a seamless user experience with efficient transaction processing and robust scalability to accommodate a growing user base.",
+    description: "MetaJungle is a comprehensive NFT trading platform facilitating the buying, selling, and trading of digital assets. The platform provides a seamless user experience with efficient transaction processing and robust scalability.",
     image: Project1,
     tech: ["React", "Redux", "Node.js", "Express.js", "MongoDB", "AWS", "Docker", "Kubernetes", "Redis"],
     link: "http://www.nftspaceship.org",
