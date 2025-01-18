@@ -5,6 +5,8 @@ import Home from './pages/Home'
 import About from './pages/About'
 import Contact from './pages/Contact'
 import Projects from './pages/Projects'
+import { useState } from 'react';
+import IntroAnimation from './components/common/IntroAnimation';
 
 function AppWithRoutes() {
   const location = useLocation()
@@ -32,11 +34,21 @@ function AppWithRoutes() {
 }
 
 function App() {
+  const [showIntro, setShowIntro] = useState(true);
+
   return (
-    <BrowserRouter>
-      <AppWithRoutes />
-    </BrowserRouter>
-  )
+    <>
+      <AnimatePresence>
+        {showIntro && <IntroAnimation onComplete={() => setShowIntro(false)} />}
+      </AnimatePresence>
+      
+      {!showIntro && (
+        <BrowserRouter>
+          <AppWithRoutes />
+        </BrowserRouter>
+      )}
+    </>
+  );
 }
 
 export default App
