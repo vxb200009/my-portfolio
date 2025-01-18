@@ -2,79 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FiMenu, FiX } from 'react-icons/fi';
-
-const Logo = () => {
-  const pathVariants = {
-    hidden: { pathLength: 0, opacity: 0 },
-    visible: {
-      pathLength: 1,
-      opacity: 1,
-      transition: {
-        duration: 1.4,
-        ease: "easeOut"
-      }
-    }
-  }
-
-  return (
-    <motion.div
-      whileHover={{ scale: 1.05 }}
-      className="relative w-14 h-12"
-    >
-      <Link to="/" className="block">
-        <motion.svg
-          viewBox="0 0 120 100"
-          className="w-full h-full"
-          initial="hidden"
-          animate="visible"
-        >
-          {/* Main flowing line forming V and connecting to K */}
-          <motion.path
-            d="M20 20 
-                L40 80 
-                L60 20
-                L60 80"
-            className="stroke-indigo-500"
-            strokeWidth="8"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            fill="none"
-            variants={pathVariants}
-          />
-
-          {/* K's diagonal strokes flowing into B */}
-          <motion.path
-            d="M60 50 
-                L85 20
-                C95 20, 95 35, 95 35
-                M60 50
-                L85 80
-                C95 80, 95 65, 95 65"
-            className="stroke-indigo-400"
-            strokeWidth="8"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            fill="none"
-            variants={pathVariants}
-          />
-
-          {/* B's central curve */}
-          <motion.path
-            d="M95 35
-               C115 35, 115 50, 95 50
-               C115 50, 115 65, 95 65"
-            className="stroke-indigo-400"
-            strokeWidth="8"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            fill="none"
-            variants={pathVariants}
-          />
-        </motion.svg>
-      </Link>
-    </motion.div>
-  )
-}
+import Logo from '../common/Logo';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -88,6 +16,11 @@ const Navbar: React.FC = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Scroll to top when route changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [location.pathname]);
 
   // Close mobile menu when route changes
   useEffect(() => {
@@ -127,6 +60,9 @@ const Navbar: React.FC = () => {
               <Link
                 key={path}
                 to={path}
+                onClick={() => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
                 className={`relative px-1 py-2 text-sm font-medium transition-colors ${
                   isActive(path)
                     ? 'text-indigo-600 dark:text-indigo-400'
@@ -169,6 +105,10 @@ const Navbar: React.FC = () => {
             <Link
               key={path}
               to={path}
+              onClick={() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                setIsOpen(false);
+              }}
               className={`block px-3 py-2 rounded-lg text-base font-medium transition-colors ${
                 isActive(path)
                   ? 'bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400'

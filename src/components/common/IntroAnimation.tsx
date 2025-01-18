@@ -1,210 +1,123 @@
-import { motion, AnimatePresence, useAnimationControls } from 'framer-motion';
-import { useEffect, useState, useMemo, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import Logo from './Logo';
 
 interface IntroAnimationProps {
   onComplete: () => void;
 }
 
-interface Particle {
-  x: number;
-  y: number;
-  size: number;
-  color: string;
-}
-
 const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
-  const [showText, setShowText] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const controls = useAnimationControls();
-
-  // Generate initial particles
-  const particles = useMemo(() => {
-    return Array.from({ length: 30 }, () => ({
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: Math.random() * 8 + 4,
-      color: `hsl(${Math.random() * 60 + 250}, 70%, 50%)`
-    }));
-  }, []);
-
-  // Handle mouse movement
-  const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    const { clientX, clientY } = e;
-    const x = (clientX / window.innerWidth) * 100;
-    const y = (clientY / window.innerHeight) * 100;
-    setMousePosition({ x, y });
-  }, []);
+  const [isAnimating, setIsAnimating] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setShowText(true);
-    }, 1500);
+      setIsAnimating(false);
+      setTimeout(onComplete, 1000); // Call onComplete after doors finish opening
+    }, 2500);
 
-    const completeTimer = setTimeout(() => {
-      onComplete();
-    }, 3000);
-
-    return () => {
-      clearTimeout(timer);
-      clearTimeout(completeTimer);
-    };
+    return () => clearTimeout(timer);
   }, [onComplete]);
 
+  const logoPathVariants = {
+    hidden: { pathLength: 0, opacity: 0 },
+    visible: {
+      pathLength: 1,
+      opacity: 1,
+      transition: {
+        duration: 1,
+        ease: "easeInOut"
+      }
+    }
+  };
+
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-      onMouseMove={handleMouseMove}
-      className="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-gray-900 to-black z-50 overflow-hidden"
-    >
-      {/* Interactive Background */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Animated gradient overlay */}
-        <motion.div
-          animate={{
-            background: [
-              'radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.15) 0%, transparent 50%)',
-              'radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.15) 0%, transparent 50%)',
-              'radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.15) 0%, transparent 50%)',
-            ]
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-          className="absolute inset-0"
-        />
-
-        {/* Interactive particles */}
-        {particles.map((particle, index) => (
+    <AnimatePresence>
+      {isAnimating && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden">
+          {/* Left Door */}
           <motion.div
-            key={index}
-            className="absolute rounded-full"
-            style={{
-              backgroundColor: particle.color,
-              width: particle.size,
-              height: particle.size,
-              filter: 'blur(1px)',
-            }}
-            animate={{
-              x: [
-                `${particle.x}%`,
-                `${particle.x + (mousePosition.x - 50) / 5}%`
-              ],
-              y: [
-                `${particle.y}%`,
-                `${particle.y + (mousePosition.y - 50) / 5}%`
-              ],
-              scale: [1, 1.2, 1],
-              opacity: [0.3, 0.6, 0.3],
-            }}
+            initial={{ x: 0 }}
+            animate={{ x: '-100%' }}
+            exit={{ x: '-100%' }}
             transition={{
-              duration: 2,
-              ease: "easeOut",
-              repeat: Infinity,
-              repeatType: "reverse"
+              duration: 1,
+              ease: [0.8, 0.1, 0.2, 0.9],
+              delay: 1.5
             }}
-          />
-        ))}
-
-        {/* Animated lines */}
-        <svg className="absolute inset-0 w-full h-full">
-          <motion.path
-            d="M0 100 Q 250 50 500 100 T 1000 100"
-            stroke="url(#gradient)"
-            strokeWidth="0.5"
-            fill="none"
-            animate={{
-              d: [
-                "M0 100 Q 250 50 500 100 T 1000 100",
-                "M0 100 Q 250 150 500 100 T 1000 100",
-                "M0 100 Q 250 50 500 100 T 1000 100"
-              ]
-            }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-          <defs>
-            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="rgba(139, 92, 246, 0.2)" />
-              <stop offset="50%" stopColor="rgba(236, 72, 153, 0.2)" />
-              <stop offset="100%" stopColor="rgba(139, 92, 246, 0.2)" />
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
-
-      {/* Converging Bubbles */}
-      <div className="relative">
-        {particles.map((particle, i) => (
-          <motion.div
-            key={`bubble-${i}`}
-            initial={{
-              x: Math.random() * window.innerWidth - window.innerWidth / 2,
-              y: Math.random() * window.innerHeight - window.innerHeight / 2,
-              scale: 0,
-              opacity: 0,
-            }}
-            animate={{
-              x: 0,
-              y: 0,
-              scale: 1,
-              opacity: [0.3, 0],
-            }}
-            transition={{
-              duration: 1.5,
-              delay: i * 0.05,
-              ease: "easeOut",
-            }}
-            style={{
-              position: 'absolute',
-              width: particle.size * 2,
-              height: particle.size * 2,
-              borderRadius: '50%',
-              background: `linear-gradient(135deg, ${particle.color}, transparent)`,
-              willChange: 'transform',
-            }}
-          />
-        ))}
-
-        {/* Portfolio Text */}
-        <AnimatePresence>
-          {showText && (
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              className="relative z-10"
+            className="absolute left-0 w-1/2 h-full bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 z-30"
+          >
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="absolute right-8 top-1/2 -translate-y-1/2 text-right"
             >
-              <motion.h1 
-                className="text-5xl md:text-7xl font-bold text-transparent bg-clip-text whitespace-nowrap"
-                style={{
-                  backgroundImage: 'linear-gradient(to right, rgb(168, 85, 247), rgb(236, 72, 153), rgb(168, 85, 247))',
-                  backgroundSize: '200% 100%',
-                  animation: 'gradientFlow 2s linear infinite',
-                }}
-              >
-                Welcome to my Portfolio
-              </motion.h1>
+              <h2 className="text-4xl sm:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
+                Welcome
+              </h2>
             </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+          </motion.div>
 
-      <style>{`
-        @keyframes gradientFlow {
-          0% { background-position: 0% 50%; }
-          100% { background-position: 200% 50%; }
-        }
-      `}</style>
-    </motion.div>
+          {/* Right Door */}
+          <motion.div
+            initial={{ x: 0 }}
+            animate={{ x: '100%' }}
+            exit={{ x: '100%' }}
+            transition={{
+              duration: 1,
+              ease: [0.8, 0.1, 0.2, 0.9],
+              delay: 1.5
+            }}
+            className="absolute right-0 w-1/2 h-full bg-gradient-to-l from-gray-900 via-gray-800 to-gray-700 z-30"
+          >
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="absolute left-8 top-1/2 -translate-y-1/2"
+            >
+              <h2 className="text-4xl sm:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
+                to My Portfolio
+              </h2>
+            </motion.div>
+          </motion.div>
+
+          {/* Center Content */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.5 }}
+            className="relative z-20 text-center"
+          >
+            <motion.div
+              animate={{
+                scale: [1, 1.1, 1],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                repeatType: "reverse",
+                ease: "easeInOut"
+              }}
+              className="w-32 h-32 sm:w-40 sm:h-40 mx-auto mb-6"
+            >
+              <Logo 
+                className="w-full h-full" 
+                pathVariants={logoPathVariants}
+                tooltipPlacement="right"
+              />
+            </motion.div>
+          </motion.div>
+
+          {/* Background Pattern */}
+          <div className="absolute inset-0 z-10">
+            <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 via-purple-500/20 to-pink-500/20" />
+            <div className="absolute inset-0 backdrop-blur-sm" />
+          </div>
+        </div>
+      )}
+    </AnimatePresence>
   );
 };
 

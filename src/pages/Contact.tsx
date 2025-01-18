@@ -89,7 +89,117 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden">
-      {/* Animated Background */}
+      {/* Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Large rotating circles */}
+        <motion.div
+          animate={{ 
+            rotate: 360,
+            scale: [1, 1.2, 1],
+          }}
+          transition={{ 
+            duration: 20,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          className="absolute -top-1/2 -right-1/2 w-full h-full border-[2px] 
+                   border-indigo-400/20 rounded-full"
+        />
+        <motion.div
+          animate={{ 
+            rotate: -360,
+            scale: [1.2, 1, 1.2],
+          }}
+          transition={{ 
+            duration: 25,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          className="absolute -bottom-1/2 -left-1/2 w-full h-full border-[2px]
+                   border-purple-400/20 rounded-full"
+        />
+
+        {/* Floating geometric shapes */}
+        <motion.div
+          className="absolute top-20 left-[20%] w-16 h-16 border-[2px] border-indigo-400/20"
+          style={{
+            clipPath: "polygon(50% 0%, 0% 100%, 100% 100%)"
+          }}
+          animate={{
+            rotate: [0, 360],
+            scale: [1, 1.2, 1],
+            y: [0, -20, 0]
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+
+        <motion.div
+          className="absolute top-[40%] right-[15%] w-12 h-12 border-[2px] border-purple-400/20"
+          style={{
+            clipPath: "polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)"
+          }}
+          animate={{
+            rotate: [0, -360],
+            scale: [1, 1.3, 1],
+            x: [0, 20, 0]
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+
+        <motion.div
+          className="absolute bottom-[30%] left-[15%] w-14 h-14 border-[2px] border-pink-400/20"
+          style={{
+            clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)"
+          }}
+          animate={{
+            rotate: [45, 405],
+            scale: [1, 1.2, 1],
+            x: [0, -20, 0]
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+
+        {/* Floating dots */}
+        {[...Array(8)].map((_, i) => (
+          <motion.div
+            key={`dot-${i}`}
+            className="absolute w-2 h-2 rounded-full bg-indigo-400/20"
+            style={{
+              top: `${Math.random() * 80 + 10}%`,
+              left: `${Math.random() * 80 + 10}%`,
+            }}
+            animate={{
+              y: [0, -30, 0],
+              scale: [1, 1.5, 1],
+              opacity: [0.2, 0.5, 0.2],
+            }}
+            transition={{
+              duration: 4 + i,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: i * 0.3,
+            }}
+          />
+        ))}
+
+        {/* Gradient blobs */}
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-300/20 rounded-full filter blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-indigo-300/20 rounded-full filter blur-3xl" />
+      </div>
+
+      {/* Animated floating shapes */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(15)].map((_, i) => {
           const pos1 = generateRandomPosition();

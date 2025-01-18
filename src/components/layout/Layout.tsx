@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import Navbar from './Navbar'
 import Footer from './Footer'
+import ScrollToTop from '../common/ScrollToTop'
 
 interface LayoutProps {
   children: React.ReactNode
@@ -14,8 +15,9 @@ const Layout = ({ children }: LayoutProps) => {
         {children}
       </main>
       <Footer />
+      <ScrollToTop />
     </div>
   )
 }
 
-export default Layout 
+export default Layout

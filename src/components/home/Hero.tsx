@@ -75,29 +75,29 @@ const Hero = () => {
   const name = "Venkat".split("")
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center w-full py-20 overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center w-full py-12 sm:py-16 md:py-20 overflow-hidden bg-white">
       {/* Geometric Shapes */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-16 h-16 border-4 border-indigo-200 rounded-full animate-spin-slow" />
-        <div className="absolute top-40 right-20 w-20 h-20 border-4 border-pink-200 rotate-45" />
-        <div className="absolute bottom-40 left-1/4 w-12 h-12 bg-yellow-100/50" />
-        <div className="absolute top-1/3 right-1/3 w-14 h-14 border-4 border-purple-200 rounded-full" />
-        <div className="absolute bottom-20 right-20 w-16 h-16 border-4 border-indigo-200 rotate-12" />
-        <div className="absolute top-1/2 left-20 w-10 h-10 bg-indigo-100/50 rotate-45" />
+        <div className="absolute top-20 left-10 w-12 sm:w-16 h-12 sm:h-16 border-4 border-indigo-200 rounded-full animate-spin-slow" />
+        <div className="absolute top-40 right-20 w-16 sm:w-20 h-16 sm:h-20 border-4 border-pink-200 rotate-45" />
+        <div className="absolute bottom-40 left-1/4 w-8 sm:w-12 h-8 sm:h-12 bg-yellow-100/50" />
+        <div className="absolute top-1/3 right-1/3 w-10 sm:w-14 h-10 sm:h-14 border-4 border-purple-200 rounded-full" />
+        <div className="absolute bottom-20 right-20 w-12 sm:w-16 h-12 sm:h-16 border-4 border-indigo-200 rotate-12" />
+        <div className="absolute top-1/2 left-20 w-8 sm:w-10 h-8 sm:h-10 bg-indigo-100/50 rotate-45" />
       </div>
 
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible" 
-        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+        className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Column - Text Content */}
-          <motion.div className="space-y-8">
+          <motion.div className="space-y-6 sm:space-y-8">
             <motion.h1 
               variants={itemVariants}
-              className="text-5xl md:text-7xl font-bold text-gray-800"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-800"
             >
               Hi, I'm{" "}
               <span className="inline-block">
@@ -123,14 +123,14 @@ const Hero = () => {
             
             <motion.p 
               variants={itemVariants}
-              className="text-xl md:text-2xl text-gray-600"
+              className="text-lg sm:text-xl md:text-2xl text-gray-600"
             >
               Full Stack Developer | Cloud Solutions Architect | Problem Solver
             </motion.p>
 
             <motion.div 
               variants={itemVariants}
-              className="prose prose-lg text-gray-600 max-w-none"
+              className="prose prose-base sm:prose-lg text-gray-600 max-w-none"
             >
               <p>
                 Passionate about creating seamless user experiences and robust applications. 
@@ -141,20 +141,20 @@ const Hero = () => {
 
             <motion.div
               variants={itemVariants}
-              className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-indigo-50/50 border border-indigo-100"
+              className="inline-flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 rounded-full bg-indigo-50/50 border border-indigo-100"
             >
-              <div className="flex items-center gap-2">
-                <div className="w-2.5 h-2.5 bg-indigo-500 rounded-full animate-pulse"></div>
-                <p className="text-gray-600">
+              <div className="flex items-center gap-1 sm:gap-2">
+                <div className="w-2 sm:w-2.5 h-2 sm:h-2.5 bg-indigo-500 rounded-full animate-pulse"></div>
+                <p className="text-sm sm:text-base text-gray-600">
                   Building amazing things @ <span className="font-semibold text-indigo-600">MetaJungle</span>
-                  <span className="ml-2 text-sm text-gray-500">as Founding Engineer</span>
+                  <span className="ml-1 sm:ml-2 text-xs sm:text-sm text-gray-500">as Founding Engineer</span>
                 </p>
               </div>
             </motion.div>
 
             <motion.div 
               variants={itemVariants}
-              className="flex gap-4"
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4"
             >
               <Button href="/projects">View My Work</Button>
               <Button href="/contact" variant="secondary">Get in Touch</Button>
@@ -168,7 +168,7 @@ const Hero = () => {
           {/* Right Column - Image */}
           <motion.div
             variants={imageVariants}
-            className="relative order-first lg:order-last w-full max-w-md mx-auto"
+            className="relative order-first lg:order-last w-full max-w-[280px] sm:max-w-md mx-auto"
           >
             <div className="relative aspect-square">
               {/* Dynamic Background Elements */}
@@ -382,6 +382,22 @@ const Hero = () => {
           </motion.div>
         </div>
       </motion.div>
+
+      {/* Wave SVG at bottom */}
+      <div className="absolute bottom-0 left-0 right-0 z-0 pointer-events-none">
+        <svg 
+          className="relative w-full h-24 md:h-32" 
+          viewBox="0 0 1440 100" 
+          preserveAspectRatio="none"
+          style={{ display: 'block' }}
+        >
+          <path 
+            d="M0,0 C480,100 960,100 1440,0 L1440,100 L0,100 Z" 
+            className="fill-indigo-50/80"
+            style={{ transform: 'translateZ(0)' }}
+          />
+        </svg>
+      </div>
 
       {/* Add this to your CSS */}
       <style>{`

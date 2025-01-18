@@ -93,7 +93,7 @@ const AnimatedLetter = ({ children }: { children: string }) => (
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay }}
-      className="relative p-8 rounded-2xl border border-indigo-400/20 bg-gray-50/30 overflow-hidden group flex-1"
+      className="relative p-6 sm:p-8 rounded-2xl border border-indigo-400/20 bg-gray-50/30 overflow-hidden group flex-1"
     >
       {/* Enhanced Pattern Designs with increased opacity */}
       <div className="absolute inset-0 opacity-[0.25]">
@@ -175,7 +175,7 @@ const AnimatedLetter = ({ children }: { children: string }) => (
       </motion.h3>
   
       {/* Skills Grid with reduced box opacity */}
-      <div className="relative z-10 grid grid-cols-2 gap-4">
+      <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
         {skills.map((skill:any, index:any) => (
           <motion.div
             key={skill.name}
@@ -281,7 +281,7 @@ const AnimatedLetter = ({ children }: { children: string }) => (
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="relative"
           >
-            <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-indigo-400 via-indigo-500 to-indigo-400 text-transparent bg-clip-text">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-indigo-400 via-indigo-500 to-indigo-400 text-transparent bg-clip-text">
               {"Technical Expertise".split('').map((letter, index) => (
                 <AnimatedLetter key={index}>
                   {letter === ' ' ? '\u00A0' : letter}
@@ -294,7 +294,7 @@ const AnimatedLetter = ({ children }: { children: string }) => (
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
-              className="flex items-center justify-center gap-3 text-lg"
+              className="flex items-center justify-center gap-2 sm:gap-3 text-base sm:text-lg"
             >
               <motion.span
                 animate={{ opacity: [1, 0.4, 1] }}
@@ -318,7 +318,7 @@ const AnimatedLetter = ({ children }: { children: string }) => (
         </motion.div>
   
         {/* Skills Categories */}
-        <div className="flex flex-col md:flex-row gap-8">
+        <div className="flex flex-col lg:flex-row gap-8">
           <SkillCategory title="Frontend" skills={skillsData.frontend} delay={0.2} />
           <SkillCategory title="Backend" skills={skillsData.backend} delay={0.4} />
           <SkillCategory title="DevOps" skills={skillsData.devops} delay={0.6} />

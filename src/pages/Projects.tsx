@@ -27,12 +27,12 @@ const Projects = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50/30 to-gray-100/30">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50/30 to-gray-100/30 py-16 sm:py-20 px-4 sm:px-6 lg:px-8">
       {/* Hero Section */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="relative py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8"
+        className="relative"
       >
         {/* Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
@@ -65,12 +65,12 @@ const Projects = () => {
         {/* Content */}
         <div className="relative max-w-7xl mx-auto">
           {/* Section Title */}
-          <div className="relative max-w-7xl mx-auto text-center mb-12 sm:mb-16 md:mb-20">
+          <div className="relative max-w-7xl mx-auto text-center mt-8 sm:mt-0 mb-12 sm:mb-16">
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-4xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-transparent bg-clip-text"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-transparent bg-clip-text"
             >
               Featured Projects
             </motion.h1>
@@ -78,7 +78,7 @@ const Projects = () => {
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ duration: 1, delay: 0.5 }}
-              className="h-1 w-16 sm:w-20 md:w-24 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 mx-auto mt-4"
+              className="h-1 w-24 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 mx-auto mt-4"
             />
           </div>
 
