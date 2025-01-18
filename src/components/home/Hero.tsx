@@ -125,7 +125,7 @@ const Hero = () => {
               variants={itemVariants}
               className="text-xl md:text-2xl text-gray-600"
             >
-              Full Stack Developer | UI/UX Designer | Problem Solver
+              Full Stack Developer | Cloud Solutions Architect | Problem Solver
             </motion.p>
 
             <motion.div 
