@@ -1,5 +1,7 @@
-import { motion } from 'framer-motion'
-import { Link, useLocation } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { FiMenu, FiX } from 'react-icons/fi';
 
 const Logo = () => {
   const pathVariants = {
@@ -74,43 +76,69 @@ const Logo = () => {
   )
 }
 
-const Navbar = () => {
-  const location = useLocation()
+const Navbar: React.FC = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
 
-  const navItems = [
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location]);
+
+  const navLinks = [
     { path: '/', label: 'Home' },
-    { path: '/projects', label: 'Projects' },
     { path: '/about', label: 'About' },
-    { path: '/contact', label: 'Contact' }
-  ]
+    { path: '/projects', label: 'Projects' },
+    { path: '/contact', label: 'Contact' },
+  ];
+
+  const isActive = (path: string) => {
+    return location.pathname === path;
+  };
 
   return (
-    <motion.header
-      initial={{ y: -20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className="fixed w-full top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100"
+      className={`fixed w-full z-50 transition-all duration-300 ${
+        isScrolled ? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg shadow-lg' : 'bg-transparent'
+      }`}
     >
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <Logo />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 sm:h-20">
+          {/* Logo */}
+          <Link to="/" className="flex items-center space-x-2">
+            <Logo />
+          </Link>
 
-          <div className="hidden md:flex space-x-8">
-            {navItems.map((item) => (
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            {navLinks.map(({ path, label }) => (
               <Link
-                key={item.path}
-                to={item.path}
-                className="relative group"
+                key={path}
+                to={path}
+                className={`relative px-1 py-2 text-sm font-medium transition-colors ${
+                  isActive(path)
+                    ? 'text-indigo-600 dark:text-indigo-400'
+                    : 'text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400'
+                }`}
               >
-                <span className={`text-gray-600 hover:text-indigo-400 transition-colors ${
-                  location.pathname === item.path ? 'text-indigo-400' : ''
-                }`}>
-                  {item.label}
-                </span>
-                {location.pathname === item.path && (
+                {label}
+                {isActive(path) && (
                   <motion.div
-                    layoutId="underline"
-                    className="absolute left-0 right-0 h-0.5 bg-indigo-400 bottom-[-4px]"
+                    layoutId="navbar-indicator"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                   />
                 )}
               </Link>
@@ -118,19 +146,42 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="md:hidden text-gray-600 hover:text-indigo-400"
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden p-2 rounded-lg text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400"
           >
-            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </motion.button>
+            {isOpen ? <FiX className="w-6 h-6" /> : <FiMenu className="w-6 h-6" />}
+          </button>
         </div>
-      </nav>
-    </motion.header>
-  )
-}
+      </div>
 
-export default Navbar 
+      {/* Mobile Navigation */}
+      <motion.div
+        initial={false}
+        animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
+        transition={{ duration: 0.3 }}
+        className={`md:hidden overflow-hidden ${
+          isScrolled ? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg' : 'bg-white dark:bg-gray-900'
+        }`}
+      >
+        <div className="px-4 py-2 space-y-1">
+          {navLinks.map(({ path, label }) => (
+            <Link
+              key={path}
+              to={path}
+              className={`block px-3 py-2 rounded-lg text-base font-medium transition-colors ${
+                isActive(path)
+                  ? 'bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400'
+                  : 'text-gray-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-800/50'
+              }`}
+            >
+              {label}
+            </Link>
+          ))}
+        </div>
+      </motion.div>
+    </motion.nav>
+  );
+};
+
+export default Navbar;

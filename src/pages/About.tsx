@@ -66,14 +66,14 @@ const certificationData: Certification[] = [
     title: "MongoDB Certified Associate Developer",
     organization: "MongoDB",
     credentials: "MDBh6mcjl9",
-    icon: <SiMongodb className="w-8 h-8" />,
+    icon: <SiMongodb className="w-6 sm:w-8 h-6 sm:h-8" />,
     image: Certification1 // Add your certification image path
   }
 ];
 
 const About = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50/30 to-gray-100/30 py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50/30 to-gray-100/30 py-16 sm:py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Animated Background Patterns */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -104,18 +104,18 @@ const About = () => {
         />
       </div>
 
-      <div className="max-w-6xl mx-auto space-y-24 relative">
+      <div className="max-w-6xl mx-auto space-y-16 sm:space-y-24 relative">
         {/* Header with 3D effect */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center transform-gpu"
+          className="text-center transform-gpu mt-8 sm:mt-0"
         >
           <motion.div
             whileHover={{ scale: 1.05 }}
             className="inline-block"
           >
-            <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 
                          to-pink-500 text-transparent bg-clip-text transform perspective-1000">
               About Me
             </h1>
@@ -135,12 +135,12 @@ const About = () => {
           viewport={{ once: true }}
           className="relative"
         >
-          <div className="flex items-center gap-4 mb-12">
-            <FiBook className="w-8 h-8 text-indigo-500" />
-            <h2 className="text-3xl font-bold text-gray-800">Education</h2>
+          <div className="flex items-center gap-2 sm:gap-4 mb-8 sm:mb-12">
+            <FiBook className="w-6 sm:w-8 h-6 sm:h-8 text-indigo-500" />
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">Education</h2>
           </div>
           
-          <div className="relative grid gap-8 md:grid-cols-2">
+          <div className="relative grid gap-4 sm:gap-8 md:grid-cols-2">
             {/* Connecting Line */}
             <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-indigo-500/20 
                          to-purple-500/20 hidden md:block" />
@@ -152,11 +152,11 @@ const About = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.2 }}
-                className={`relative ${index % 2 === 0 ? 'md:text-right md:pr-12' : 'md:pl-12'}`}
+                className={`relative ${index % 2 === 0 ? 'md:text-right md:pr-8 sm:md:pr-12' : 'md:pl-8 sm:md:pl-12'}`}
               >
                 <motion.div
                   whileHover={{ scale: 1.02 }}
-                  className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all
+                  className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all
                            border border-gray-100 group backdrop-blur-sm"
                 >
                   {/* Timeline Dot */}
@@ -169,9 +169,9 @@ const About = () => {
                       className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 
                                rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"
                     />
-                    <h3 className="text-xl font-bold text-gray-800 mb-2">{edu.school}</h3>
-                    <p className="text-indigo-600 font-semibold mb-2">{edu.degree}</p>
-                    <div className="flex items-center justify-between text-gray-600 text-sm">
+                    <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-1 sm:mb-2">{edu.school}</h3>
+                    <p className="text-sm sm:text-base text-indigo-600 font-semibold mb-1 sm:mb-2">{edu.degree}</p>
+                    <div className="flex items-center justify-between text-gray-600 text-xs sm:text-sm">
                       <span>{edu.period}</span>
                       <span className="font-medium">GPA: {edu.gpa}</span>
                     </div>
@@ -189,24 +189,12 @@ const About = () => {
           viewport={{ once: true }}
           className="relative"
         >
-          <div className="flex items-center gap-4 mb-12">
-            <motion.div
-              animate={{
-                scale: [1, 1.2, 1],
-                rotate: [0, 10, -10, 0],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            >
-              <FiBriefcase className="w-8 h-8 text-purple-500" />
-            </motion.div>
-            <h2 className="text-3xl font-bold text-gray-800">Experience</h2>
+          <div className="flex items-center gap-2 sm:gap-4 mb-8 sm:mb-12">
+            <FiBriefcase className="w-6 sm:w-8 h-6 sm:h-8 text-purple-500" />
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">Experience</h2>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-3">
+          <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
             {experienceData.map((exp, index) => (
               <motion.div
                 key={index}
@@ -217,8 +205,8 @@ const About = () => {
               >
                 <motion.div
                   whileHover={{ y: -5 }}
-                  className={`relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl 
-                           transition-all border h-full group
+                  className={`relative bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg hover:shadow-xl 
+                           transition-all border border-gray-100 relative group backdrop-blur-sm
                            ${index === 0 ? 'border-purple-500/50 bg-gradient-to-br from-purple-50 to-white' : 'border-gray-100'}`}
                 >
                   {/* Latest Experience Badge */}
@@ -325,7 +313,7 @@ const About = () => {
                     {/* Card Content with Enhanced Hover Effects for Latest */}
                     <motion.h3 
                       whileHover={{ scale: 1.02 }}
-                      className={`text-xl font-bold mb-3 transition-colors duration-300
+                      className={`text-lg sm:text-xl font-bold mb-1 sm:mb-2 transition-colors duration-300
                               ${index === 0 ? 'text-purple-700' : 'text-gray-800'}
                               ${index === 0 ? 'group-hover:text-purple-800' : 'group-hover:text-purple-600'}`}
                     >
@@ -393,12 +381,12 @@ const About = () => {
           viewport={{ once: true }}
           className="relative"
         >
-          <div className="flex items-center gap-4 mb-12">
-            <FiCheckCircle className="w-8 h-8 text-green-500" />
-            <h2 className="text-3xl font-bold text-gray-800">Certifications</h2>
+          <div className="flex items-center gap-2 sm:gap-4 mb-8 sm:mb-12">
+            <FiCheckCircle className="w-6 sm:w-8 h-6 sm:h-8 text-green-500" />
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">Certifications</h2>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-2">
+          <div className="grid gap-4 sm:gap-6 md:grid-cols-2">
             {certificationData.map((cert, index) => (
               <motion.div
                 key={index}
@@ -409,8 +397,8 @@ const About = () => {
               >
                 <motion.div
                   whileHover={{ y: -5 }}
-                  className="relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl 
-                           transition-all border border-gray-100 overflow-hidden group"
+                  className="relative bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all
+                           border border-gray-100 overflow-hidden group"
                 >
                   {/* Decorative Elements */}
                   <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br 
@@ -420,7 +408,7 @@ const About = () => {
                     {/* Certificate Image */}
                     <motion.div
                       whileHover={{ scale: 1.05 }}
-                      className="relative w-16 h-16 flex-shrink-0 rounded-xl overflow-hidden shadow-md 
+                      className="relative w-16 h-16 flex-shrink-0 rounded-xl sm:rounded-2xl overflow-hidden shadow-md 
                                  border border-gray-100/50"
                     >
                       <img
@@ -444,7 +432,7 @@ const About = () => {
                         className="h-0.5 bg-gradient-to-r from-green-500/50 to-transparent mb-4"
                       />
                       
-                      <h3 className="text-lg font-bold text-gray-800 mb-2">
+                      <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-1 sm:mb-2">
                         {cert.title}
                       </h3>
                       <div className="space-y-1.5">

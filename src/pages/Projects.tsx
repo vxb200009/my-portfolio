@@ -32,7 +32,7 @@ const Projects = () => {
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="relative py-20 px-4 sm:px-6 lg:px-8"
+        className="relative py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8"
       >
         {/* Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
@@ -64,52 +64,51 @@ const Projects = () => {
 
         {/* Content */}
         <div className="relative max-w-7xl mx-auto">
-          {/* Title Section remains the same */}
-{/* Section Title */}
-<div className="relative max-w-7xl mx-auto text-center mb-20">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-5xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-transparent bg-clip-text"
-          >
-            Featured Projects
-          </motion.h1>
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 1, delay: 0.5 }}
-            className="h-1 w-24 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 mx-auto mt-4"
-          />
-        </div>
-        {/* Projects Grid */}
-          {/* Carousel Container */}
-          <div className="relative">
+          {/* Section Title */}
+          <div className="relative max-w-7xl mx-auto text-center mb-12 sm:mb-16 md:mb-20">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-4xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-transparent bg-clip-text"
+            >
+              Featured Projects
+            </motion.h1>
+            <motion.div
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 1, delay: 0.5 }}
+              className="h-1 w-16 sm:w-20 md:w-24 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 mx-auto mt-4"
+            />
+          </div>
+
+          {/* Projects Carousel */}
+          <div className="relative px-4 sm:px-8 md:px-12">
             {/* Navigation Buttons */}
-            <div className="absolute top-1/2 -left-12 transform -translate-y-1/2 z-10">
+            <div className="absolute top-1/2 -left-2 sm:-left-8 md:-left-12 transform -translate-y-1/2 z-10">
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={prevPage}
-                className="p-3 rounded-full bg-white shadow-lg hover:shadow-xl
+                className="p-2 sm:p-3 rounded-full bg-white shadow-lg hover:shadow-xl
                          text-gray-800 hover:text-indigo-600 transition-all"
               >
-                <FiChevronLeft className="w-6 h-6" />
+                <FiChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
               </motion.button>
             </div>
-            <div className="absolute top-1/2 -right-12 transform -translate-y-1/2 z-10">
+            <div className="absolute top-1/2 -right-2 sm:-right-8 md:-right-12 transform -translate-y-1/2 z-10">
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={nextPage}
-                className="p-3 rounded-full bg-white shadow-lg hover:shadow-xl
+                className="p-2 sm:p-3 rounded-full bg-white shadow-lg hover:shadow-xl
                          text-gray-800 hover:text-indigo-600 transition-all"
               >
-                <FiChevronRight className="w-6 h-6" />
+                <FiChevronRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
               </motion.button>
             </div>
 
-            {/* Projects Carousel */}
+            {/* Projects Grid */}
             <div className="overflow-hidden">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -118,7 +117,7 @@ const Projects = () => {
                   animate={{ x: 0, opacity: 1 }}
                   exit={{ x: -1000, opacity: 0 }}
                   transition={{ duration: 0.5 }}
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
                 >
                   {projectsData
                     .slice(
@@ -137,16 +136,16 @@ const Projects = () => {
             </div>
 
             {/* Pagination Dots */}
-            <div className="flex justify-center mt-8 gap-2">
+            <div className="flex justify-center mt-6 sm:mt-8 gap-1.5 sm:gap-2">
               {Array.from({ length: totalPages }).map((_, index) => (
                 <motion.button
                   key={index}
                   whileHover={{ scale: 1.2 }}
                   whileTap={{ scale: 0.8 }}
                   onClick={() => setCurrentPage(index)}
-                  className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                  className={`w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full transition-all duration-300 ${
                     currentPage === index
-                      ? 'bg-indigo-600 w-6'
+                      ? 'bg-indigo-600 w-4 sm:w-6'
                       : 'bg-gray-300 hover:bg-indigo-400'
                   }`}
                 />
@@ -181,7 +180,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
           initial={{ y: 60 }}
           animate={{ y: 0 }}
           transition={{ duration: 0.8, delay: index * 0.2, type: "spring", stiffness: 100 }}
-          className="relative h-[500px] rounded-2xl overflow-hidden shadow-lg border border-gray-100 
+          className="relative h-[400px] sm:h-[450px] md:h-[500px] rounded-2xl overflow-hidden shadow-lg border border-gray-100 
                    bg-white backdrop-blur-sm"
         >
           {/* Project Image */}
@@ -196,8 +195,8 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
           </div>
 
           {/* Content */}
-          <div className="relative p-6 h-3/5 flex flex-col">
-            <h3 className="text-xl font-bold text-gray-900 mb-2 truncate">
+          <div className="relative p-4 sm:p-5 md:p-6 h-3/5 flex flex-col">
+            <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 truncate">
               {project.title}
             </h3>
             <p className="text-gray-600 mb-4 line-clamp-4 text-sm flex-grow">
@@ -205,7 +204,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
             </p>
 
             {/* Tech Stack */}
-            <div className="flex flex-wrap gap-1.5 mb-6">
+            <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-4 sm:mb-6">
               {project.tech.slice(0, 4).map((tech, idx) => (
                 <span
                   key={idx}
@@ -226,7 +225,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
             <motion.button
               onClick={() => setIsDetailsOpen(true)}
               whileTap={{ scale: 0.98 }}
-              className="w-full px-4 py-2.5 bg-gradient-to-r from-indigo-500 to-purple-500 
+              className="w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-gradient-to-r from-indigo-500 to-purple-500 
                      text-white rounded-xl font-medium shadow-md text-sm"
             >
               View Details
@@ -244,4 +243,4 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
   );
 };
 
-export default Projects; 
+export default Projects;

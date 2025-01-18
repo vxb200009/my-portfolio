@@ -3,6 +3,8 @@ import { ReactNode } from 'react';
 import Project1 from "../assets/project-images/Project1.png";
 import Project2 from "../assets/project-images/Project2.png";
 import Project3 from "../assets/project-images/Project3.png";
+import Project4 from "../assets/project-images/Project4.png";
+import Project5 from "../assets/project-images/Project5.png";
 
 interface ProjectSection {
   title: string;
@@ -32,7 +34,7 @@ export const projectsData: ProjectContent[] = [
     title: "MetaJungle",
     description: "MetaJungle is a comprehensive NFT trading platform facilitating the buying, selling, and trading of digital assets. The platform provides a seamless user experience with efficient transaction processing and robust scalability.",
     image: Project1,
-    tech: ["React", "Redux", "Node.js", "Express.js", "MongoDB", "AWS", "Docker", "Kubernetes", "Redis"],
+    tech: ["React", "Redux", "Node.js", "Express.js", "MongoDB", "AWS", "Docker", "Kubernetes", "Redis", "AWS ECS", "AWS SNS"],
     link: "http://www.nftspaceship.org",
     sections: [
       {
@@ -132,7 +134,7 @@ export const projectsData: ProjectContent[] = [
     title: "Shock'em Comics",
     description: "Shock'em Comics is an innovative platform that combines the excitement of baseball card collecting with the rich narratives of comic books. It offers users the ability to purchase, trade, and read digital comics, each available in various collectible variants. The platform is designed to provide a seamless eCommerce experience alongside a high-performance digital reading interface.",
     image: Project2,
-    tech: ["React", "Node.js", "AWS CloudFront", "Docker", "Kubernetes", "Redis", "OAuth 2.0", "JWT"],
+    tech: ["React", "Node.js", "AWS CloudFront", "AWS S3", "AWS SES", "Docker", "Kubernetes", "Redis", "OAuth 2.0", "JWT"],
     link: "https://shockem-comics.com",
     sections: [
       {
@@ -229,6 +231,80 @@ export const projectsData: ProjectContent[] = [
   },
   {
     id: 3,
+    title: "Healthcare Platform with Real-Time Interaction",
+    description: "Advanced healthcare platform featuring real-time communication capabilities and a sophisticated symptom-based recommendation engine, prioritizing high availability and security compliance. Achieved significant improvements in user satisfaction and system performance while maintaining HIPAA compliance.",
+    image: Project4,
+    tech: ["Node.js", "WebSocket", "TensorFlow", "Spring Boot", "MongoDB", "AWS", "Kubernetes", "Datadog", "WebRTC", "Socket.IO", "Redis", "Cassandra"],
+    link: "",
+    sections: [
+      {
+        title: "Real-Time Communication System",
+        icon: <FiLayers className="w-6 h-6" />,
+        overview: "Built a comprehensive real-time communication infrastructure for seamless healthcare interactions.",
+        details: [
+          {
+            subtitle: "WebSocket Implementation",
+            text: "Developed real-time chat service using WebSocket and Node.js backend, with Socket.IO for efficient message broadcasting and session management. Implemented real-time presence detection and message delivery confirmation.",
+            color: "from-violet-100/80 to-purple-100/80"
+          },
+          {
+            subtitle: "Video Consultation",
+            text: "Integrated WebRTC for video calls with AWS EC2-hosted signaling servers, enabling secure and reliable healthcare consultations. Implemented adaptive bitrate streaming and fallback mechanisms for poor network conditions.",
+            color: "from-purple-100/80 to-fuchsia-100/80"
+          }
+        ],
+        bgClass: "bg-gradient-to-br from-violet-500/10 to-purple-500/10"
+      },
+      {
+        title: "Intelligent Recommendation Engine",
+        icon: <FiBarChart className="w-6 h-6" />,
+        overview: "Implemented an advanced symptom-based recommendation system with real-time processing capabilities.",
+        details: [
+          {
+            subtitle: "Data Processing Pipeline",
+            text: "Built real-time symptom ingestion using Kafka and deployed TensorFlow models for accurate specialist recommendations. Implemented continuous model training and validation pipeline with automated updates.",
+            color: "from-cyan-100/80 to-sky-100/80"
+          },
+          {
+            subtitle: "Personalization System",
+            text: "Integrated patient medical history from Cassandra for personalized recommendations and stored session data in MongoDB for quick analytics. Achieved 85% accuracy in specialist recommendations through machine learning optimization.",
+            color: "from-sky-100/80 to-blue-100/80"
+          },
+          {
+            subtitle: "Performance Metrics",
+            text: "Achieved <100ms latency for chat interactions, supporting over 50k concurrent users. Real-time capabilities led to a 50% increase in user satisfaction and 40% reduction in appointment scheduling time.",
+            color: "from-blue-100/80 to-indigo-100/80"
+          }
+        ],
+        bgClass: "bg-gradient-to-br from-cyan-500/10 to-sky-500/10"
+      },
+      {
+        title: "Infrastructure & Security",
+        icon: <FiCloud className="w-6 h-6" />,
+        overview: "Established a secure, scalable infrastructure with comprehensive compliance measures.",
+        details: [
+          {
+            subtitle: "Scalable Architecture",
+            text: "Implemented AWS ELB for traffic management and Kubernetes auto-scaling for WebSocket servers. Deployed in multi-AZ setup with Eureka for service registry and automated failover mechanisms.",
+            color: "from-rose-100/80 to-pink-100/80"
+          },
+          {
+            subtitle: "Security & Compliance",
+            text: "Enforced HIPAA compliance with encrypted PII/PHI data, implemented MFA and JWT authentication, and deployed WAF for threat mitigation. Regular security audits and penetration testing using OWASP ZAP.",
+            color: "from-pink-100/80 to-fuchsia-100/80"
+          },
+          {
+            subtitle: "System Efficiency",
+            text: "Built a horizontally scalable architecture supporting millions of daily active users with 99.99% uptime. Implemented comprehensive monitoring with Datadog for real-time system health tracking.",
+            color: "from-fuchsia-100/80 to-purple-100/80"
+          }
+        ],
+        bgClass: "bg-gradient-to-br from-rose-500/10 to-pink-500/10"
+      }
+    ]
+  },
+  {
+    id: 4,
     title: "Content Management System",
     description: "This CMS empowers non-technical users to design, publish, and manage static websites effortlessly. It combines an intuitive user interface with robust backend functionalities, enabling users to create and maintain websites without coding expertise.",
     image: Project3,
@@ -344,7 +420,83 @@ export const projectsData: ProjectContent[] = [
         bgClass: "bg-gradient-to-br from-green-100/90 to-emerald-100/90"
       }
     ]
-  }
+  },
+  {
+    id: 5,
+    title: "Legacy Database Migration & API Redesign",
+    description: "Comprehensive migration of a legacy database to Apache Cassandra with a complete API redesign, focusing on scalability, fault tolerance, and enhanced performance while ensuring robust security. The project achieved significant performance improvements with optimized query response times and enhanced system reliability.",
+    image: Project5,
+    tech: ["Apache Cassandra", "Spring Boot", "Kafka", "Redis", "AWS", "OAuth 2.0", "Jenkins", "ELK Stack", "Apache Spark", "Swagger"],
+    link: "",
+    sections: [
+      {
+        title: "System Design & Architecture",
+        icon: <FiDatabase className="w-6 h-6" />,
+        overview: "Transformed a monolithic architecture into a scalable microservices ecosystem with enhanced data management capabilities.",
+        details: [
+          {
+            subtitle: "Microservices Transition",
+            text: "Decomposed monolithic architecture into independently deployable services using Spring Boot and Spring Cloud. Implemented Kafka for high-throughput event handling and asynchronous communication between services for user activity logging and data updates.",
+            color: "from-purple-100/80 to-indigo-100/80"
+          },
+          {
+            subtitle: "Data Layer Migration",
+            text: "Successfully migrated legacy SQL data to Apache Cassandra with denormalized schema optimization and query-driven modeling. Implemented automated ETL workflows using Apache Spark and Redis caching for frequently accessed data, significantly improving read performance.",
+            color: "from-indigo-100/80 to-blue-100/80"
+          },
+          {
+            subtitle: "API Redesign",
+            text: "Developed RESTful APIs with Swagger documentation, HATEOAS principles, and robust versioning strategy for legacy client compatibility. Integrated rate limiting and throttling through AWS API Gateway/NGINX for abuse prevention.",
+            color: "from-blue-100/80 to-cyan-100/80"
+          }
+        ],
+        bgClass: "bg-gradient-to-br from-purple-500/10 to-indigo-500/10"
+      },
+      {
+        title: "Scalability & Resilience",
+        icon: <FiServer className="w-6 h-6" />,
+        overview: "Implemented robust scalability and fault tolerance mechanisms to ensure high availability and system reliability.",
+        details: [
+          {
+            subtitle: "Distributed Architecture",
+            text: "Deployed Cassandra in multi-node setup across data centers with HAProxy for load balancing. Implemented horizontal scaling capabilities with automated failover mechanisms and data replication for zero downtime.",
+            color: "from-emerald-100/80 to-teal-100/80"
+          },
+          {
+            subtitle: "Resilience Patterns",
+            text: "Integrated circuit breakers using Hystrix for graceful failure handling and cascading failure prevention. Implemented comprehensive retry policies and automated CI/CD pipelines with Jenkins, including unit testing with JUnit and Mockito.",
+            color: "from-teal-100/80 to-cyan-100/80"
+          }
+        ],
+        bgClass: "bg-gradient-to-br from-emerald-500/10 to-teal-500/10"
+      },
+      {
+        title: "Security Implementation",
+        icon: <FiShield className="w-6 h-6" />,
+        overview: "Enhanced system security with comprehensive authentication, encryption, and monitoring solutions.",
+        details: [
+          {
+            subtitle: "Authentication & Authorization",
+            text: "Implemented OAuth 2.0 with JWT tokens and RBAC at API gateway level. Secured sensitive data using AES-256 encryption and AWS KMS for key management, ensuring robust access control and data protection.",
+            color: "from-orange-100/80 to-amber-100/80"
+          },
+          {
+            subtitle: "Monitoring & Compliance",
+            text: "Established centralized logging with ELK Stack and security monitoring using AWS CloudTrail and Splunk. Implemented comprehensive audit trails and automated security scanning for potential vulnerabilities.",
+            color: "from-amber-100/80 to-yellow-100/80"
+          },
+          {
+            subtitle: "System Outcomes",
+            text: "Achieved 99.99% system availability, reduced API response times by 60%, and established a secure, compliant infrastructure capable of handling millions of daily transactions.",
+            color: "from-yellow-100/80 to-orange-100/80"
+          }
+        ],
+        bgClass: "bg-gradient-to-br from-orange-500/10 to-amber-500/10"
+      }
+    ]
+  },
+ 
+  // ... existing projects
 ];
 
 // Helper function to get project by ID

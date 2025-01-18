@@ -229,7 +229,7 @@ const ProjectDetails = ({ project, isOpen, onClose }: ProjectDetailsProps) => {
                 >
                   <div className="flex-1">
                     <p className="text-md font-semibold text-gray-600">
-                    MetaJungle is a comprehensive platform designed to facilitate the buying, selling, and trading of digital assets, specifically NFTs (Non-Fungible Tokens). The platform aims to provide a seamless user experience with efficient transaction processing and robust scalability to accommodate a growing user base.
+                      {project.description}
                     </p>
                   </div>
                   <div className="flex gap-3">
@@ -263,89 +263,153 @@ const ProjectDetails = ({ project, isOpen, onClose }: ProjectDetailsProps) => {
               </motion.div>
 
               {/* Content */}
-              <div className="px-8 py-6 space-y-12">
-                {sections.map((section, idx) => (
-                  <motion.div
-                    key={idx}
-                    variants={itemVariants}
-                    className="relative rounded-2xl p-8 hover:shadow-lg transition-all duration-500
-                               bg-white/80 backdrop-blur-sm border border-gray-200/50
-                               hover:border-indigo-200/50 overflow-hidden group"
-                  >
-                    <AnimatedPattern />
-                    <AnimatedShapes />
-                    <ScrollShapes />
-                    
-                    {/* Add a subtle gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent 
-                                    group-hover:opacity-50 transition-opacity duration-500" />
-                    
-                    <div className="flex items-center gap-4 mb-8">
-                      <motion.div 
-                        whileHover={{ rotate: 360 }}
-                        transition={{ duration: 0.5 }}
-                        className="p-3 bg-white dark:bg-gray-800 rounded-xl shadow-md"
-                      >
-                        {section.icon}
-                      </motion.div>
-                      <h3 className="text-xl font-semibold text-gray-800">
-                        {section.title}
-                      </h3>
-                    </div>
+              <div className="px-2 py-6">
+                <div className="mx-auto max-w-8xl px-4 sm:px-6 lg:px-8">
+                  <div className="space-y-16">
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5 }}
+                      className="mt-6 flex flex-col md:flex-row gap-6"
+                    >
+                      {/* Project Image/Placeholder */}
+                      <div className="w-full h-[400px] rounded-xl overflow-hidden shadow-lg mb-6">
+                        {project.image && project.id!==5 ? (
+                          <img
+                            src={project.image}
+                            alt={project.title}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 relative">
+                            <div 
+                              className="absolute inset-0" 
+                              style={{
+                                backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+                                backgroundSize: '30px 30px'
+                              }}
+                            />
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <div className="text-center">
+                                <div className="text-white text-3xl font-bold mb-4">
+                                  {project.title}
+                                </div>
+                                <div className="flex flex-wrap justify-center gap-2">
+                                  {project.tech.slice(0, 4).map((tech, index) => (
+                                    <span
+                                      key={index}
+                                      className="px-3 py-1 bg-white/10 rounded-full text-white text-sm"
+                                    >
+                                      {tech}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </motion.div>
 
-                    <p className="text-gray-600 text-sm leading-relaxed mb-8">
-                      {section.overview}
-                    </p>
-
-                    <div className="space-y-8">
-                      {section.details.map((detail, detailIdx) => (
+                    {/* Project Sections */}
+                    <div className="space-y-16">
+                      {sections.map((section, idx) => (
                         <motion.div
-                          key={detailIdx}
-                          whileHover={{ scale: 1.01 }}
-                          className={`relative bg-gradient-to-br ${detail.color} p-6 rounded-xl 
-                                   shadow-sm hover:shadow-md transition-all duration-300
-                                   border border-white/50 backdrop-blur-[2px]`}
+                          key={idx}
+                          variants={itemVariants}
+                          className="relative rounded-2xl p-8 hover:shadow-lg transition-all duration-500
+                                   bg-white/80 backdrop-blur-sm border border-gray-200/50
+                                   hover:border-indigo-200/50 overflow-hidden group"
                         >
-                          <div className="absolute inset-0 bg-white/40 rounded-xl" />
-                          <div className="relative z-10">
-                            <h4 className="text-base font-semibold text-gray-700 mb-2">
-                              {detail.subtitle}
-                            </h4>
-                            <p className="text-gray-600 text-sm leading-relaxed">
-                              {detail.text}
-                            </p>
+                          <AnimatedPattern />
+                          <AnimatedShapes />
+                          <ScrollShapes />
+                          
+                          {/* Add a subtle gradient overlay */}
+                          <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent 
+                                          group-hover:opacity-50 transition-opacity duration-500" />
+                          
+                          <div className="flex items-center gap-4 mb-8">
+                            <motion.div 
+                              whileHover={{ rotate: 360 }}
+                              transition={{ duration: 0.5 }}
+                              className="p-3 bg-white dark:bg-gray-800 rounded-xl shadow-md"
+                            >
+                              {section.icon}
+                            </motion.div>
+                            <h3 className="text-xl font-semibold text-gray-800">
+                              {section.title}
+                            </h3>
+                          </div>
+
+                          <p className="text-gray-600 text-sm leading-relaxed mb-8">
+                            {section.overview}
+                          </p>
+
+                          <div className="space-y-8">
+                            {section.details.map((detail, detailIdx) => (
+                              <motion.div
+                                key={detailIdx}
+                                whileHover={{ scale: 1.01 }}
+                                className={`relative bg-gradient-to-br ${detail.color} p-6 rounded-xl 
+                                           shadow-sm hover:shadow-md transition-all duration-300
+                                           border border-white/50 backdrop-blur-[2px]`}
+                              >
+                                <div className="absolute inset-0 bg-white/40 rounded-xl" />
+                                <div className="relative z-10">
+                                  <h4 className="text-base font-semibold text-gray-700 mb-2">
+                                    {detail.subtitle}
+                                  </h4>
+                                  <p className="text-gray-600 text-sm leading-relaxed">
+                                    {detail.text}
+                                  </p>
+                                </div>
+                              </motion.div>
+                            ))}
                           </div>
                         </motion.div>
                       ))}
                     </div>
-                  </motion.div>
-                ))}
 
-                {/* Tech Stack */}
-                <motion.div
-                  variants={itemVariants}
-                  className="relative bg-white/80 backdrop-blur-sm rounded-2xl p-8
-                            border border-gray-200/50 hover:border-indigo-200/50
-                            transition-all duration-500"
-                >
-                  <AnimatedPattern />
-                  <h3 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-6">
-                    Tech Stack
-                  </h3>
-                  <div className="flex flex-wrap gap-3">
-                    {project.tech.map((tech, idx) => (
-                      <motion.span
-                        key={idx}
-                        whileHover={{ scale: 1.1, rotate: [-5, 5, 0] }}
-                        transition={{ duration: 0.3 }}
-                        className="px-4 py-2 bg-white dark:bg-gray-800 text-indigo-600 dark:text-indigo-400 
-                                 rounded-full text-sm font-medium shadow-sm hover:shadow-md transition-shadow"
-                      >
-                        {tech}
-                      </motion.span>
-                    ))}
+                    {/* Tech Stack */}
+                    <motion.div
+                      variants={itemVariants}
+                      className="relative bg-white/80 backdrop-blur-sm rounded-2xl p-8
+                                border border-gray-200/50 hover:border-indigo-200/50
+                                transition-all duration-500 overflow-hidden mt-16"
+                    >
+                      <AnimatedPattern />
+                      <div className="relative z-10">
+                        <h3 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-6 flex items-center gap-2">
+                          <FiCode className="w-6 h-6" />
+                          Tech Stack
+                        </h3>
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                          {project.tech.map((tech, idx) => (
+                            <motion.div
+                              key={idx}
+                              whileHover={{ scale: 1.02 }}
+                              className={`relative bg-gradient-to-br ${
+                                idx % 3 === 0 ? 'from-purple-100/80 to-indigo-100/80' :
+                                idx % 3 === 1 ? 'from-indigo-100/80 to-blue-100/80' :
+                                'from-blue-100/80 to-cyan-100/80'
+                              } p-3 rounded-xl shadow-sm hover:shadow-md 
+                              transition-all duration-300 border border-white/50 
+                              backdrop-blur-[2px] group`}
+                            >
+                              <div className="absolute inset-0 bg-white/40 rounded-xl" />
+                              <div className="relative z-10">
+                                <span className="text-sm font-medium text-gray-700">
+                                  {tech}
+                                </span>
+                              </div>
+                            </motion.div>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
                   </div>
-                </motion.div>
+                </div>
               </div>
             </div>
           </motion.div>
