@@ -200,49 +200,54 @@ const ProjectDetails = ({ project, isOpen, onClose }: ProjectDetailsProps) => {
                 <div className="w-12 h-1.5 bg-gray-300 dark:bg-gray-700 rounded-full" />
               </div>
 
-              {/* Header */}
+              {/* Close Button - Sticky */}
+              <div className="sticky top-4 z-20 flex justify-end px-4">
+                <motion.button
+                  onClick={onClose}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="p-2 bg-white/80 hover:bg-gray-100 dark:hover:bg-gray-800 
+                           rounded-full transition-colors shadow-md backdrop-blur-sm"
+                >
+                  <FiX className="w-5 h-5" />
+                </motion.button>
+              </div>
+
+              {/* Header - Not Sticky */}
               <motion.div 
                 variants={itemVariants}
-                className="sticky top-0 bg-white/90 backdrop-blur-sm z-10 px-8 py-6"
+                className="bg-white/90 backdrop-blur-sm px-6 py-5 mb-4"
               >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <HiOutlineSparkles className="w-8 h-8 text-indigo-600 animate-pulse" />
-                    <motion.h2 
-                      className="text-3xl font-bold bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent"
-                      whileHover={{ scale: 1.02 }}
-                    >
-                      {project.title}
-                    </motion.h2>
-                  </div>
-                  <button
-                    onClick={onClose}
-                    className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
+                <div className="flex items-center gap-4">
+                  <HiOutlineSparkles className="w-6 h-6 text-indigo-600 animate-pulse" />
+                  <motion.h2 
+                    className="text-2xl font-bold bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent"
+                    whileHover={{ scale: 1.02 }}
                   >
-                    <FiX className="w-6 h-6" />
-                  </button>
+                    {project.title}
+                  </motion.h2>
                 </div>
                 
                 <motion.div 
                   variants={itemVariants}
-                  className="mt-6 flex flex-col md:flex-row gap-6"
+                  className="mt-4 flex flex-col md:flex-row gap-5"
                 >
                   <div className="flex-1">
-                    <p className="text-md font-semibold text-gray-600">
+                    <p className="text-sm text-gray-600 leading-relaxed">
                       {project.description}
                     </p>
                   </div>
-                  <div className="flex gap-3">
+                  <div className="flex gap-2">
                     <motion.a
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-xl 
-                               hover:bg-indigo-700 transition-colors shadow-md"
+                      className="flex items-center gap-1.5 px-3 py-1.5 bg-indigo-600 text-white rounded-lg 
+                               hover:bg-indigo-700 transition-colors shadow-sm text-xs"
                     >
-                      <FiExternalLink className="w-4 h-4" />
+                      <FiExternalLink className="w-3.5 h-3.5" />
                       Live Demo
                     </motion.a>
                     <motion.a
@@ -251,11 +256,11 @@ const ProjectDetails = ({ project, isOpen, onClose }: ProjectDetailsProps) => {
                       href="#"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 
-                               text-gray-700 dark:text-gray-200 rounded-xl hover:bg-gray-200 
-                               dark:hover:bg-gray-700 transition-colors"
+                      className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 dark:bg-gray-800 
+                               text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-200 
+                               dark:hover:bg-gray-700 transition-colors text-xs"
                     >
-                      <FiGithub className="w-4 h-4" />
+                      <FiGithub className="w-3.5 h-3.5" />
                       Source
                     </motion.a>
                   </div>
