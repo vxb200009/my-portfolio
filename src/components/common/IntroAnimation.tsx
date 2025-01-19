@@ -106,6 +106,8 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
                 className="w-full h-full" 
                 pathVariants={logoPathVariants}
                 tooltipPlacement="right"
+                text= {true}
+                showTooltip={false}
               />
             </motion.div>
           </motion.div>

@@ -6,6 +6,7 @@ interface LogoProps {
   className?: string;
   pathVariants?: any;
   showTooltip?: boolean;
+  text?: boolean;
   tooltipPlacement?: 'top' | 'bottom' | 'right';
 }
 
@@ -13,7 +14,8 @@ const Logo = ({
   className = "w-14 h-12", 
   pathVariants,
   showTooltip = true,
-  tooltipPlacement = 'bottom'
+  tooltipPlacement = 'bottom',
+  text = false
 }: LogoProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -113,6 +115,15 @@ const Logo = ({
           variants={variants}
         />
       </motion.svg>
+
+      {text && <div className="flex flex-col items-center gap-0.5">
+                <span className="text-sm font-medium bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                  Venkat Kishan
+                </span>
+                <span className="text-xs text-gray-500 dark:text-gray-400">
+                  Bommali
+                </span>
+              </div>}
 
       {/* Tooltip */}
       {showTooltip && (
