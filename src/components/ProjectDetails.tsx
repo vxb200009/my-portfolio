@@ -200,18 +200,13 @@ const ProjectDetails = ({ project, isOpen, onClose }: ProjectDetailsProps) => {
                 <div className="w-12 h-1.5 bg-gray-300 dark:bg-gray-700 rounded-full" />
               </div>
 
-              {/* Close Button - Sticky */}
-              <div className="sticky top-4 z-20 flex justify-end px-4">
-                <motion.button
-                  onClick={onClose}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="p-2 bg-white/80 hover:bg-gray-100 dark:hover:bg-gray-800 
-                           rounded-full transition-colors shadow-md backdrop-blur-sm"
-                >
-                  <FiX className="w-5 h-5" />
-                </motion.button>
-              </div>
+              {/* Close button */}
+              <button
+                onClick={onClose}
+                className="absolute top-4 right-4 p-2 rounded-full bg-gray-800 text-white hover:bg-gray-900 transition-colors duration-200 shadow-lg z-50"
+              >
+                <FiX className="w-6 h-6" />
+              </button>
 
               {/* Header - Not Sticky */}
               <motion.div 
@@ -237,32 +232,33 @@ const ProjectDetails = ({ project, isOpen, onClose }: ProjectDetailsProps) => {
                       {project.description}
                     </p>
                   </div>
-                  <div className="flex gap-2">
-                    <motion.a
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      href={project.link}
+                  <div className="flex gap-3 mt-6">
+                    <a
+                      href={project.link || '#'}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 px-3 py-1.5 bg-indigo-600 text-white rounded-lg 
-                               hover:bg-indigo-700 transition-colors shadow-sm text-xs"
+                      className={`p-2 rounded-full transition-all duration-200 ${
+                        project.link 
+                          ? 'bg-indigo-600 text-white hover:bg-indigo-700' 
+                          : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                      }`}
+                      onClick={e => !project.link && e.preventDefault()}
                     >
-                      <FiExternalLink className="w-3.5 h-3.5" />
-                      Live Demo
-                    </motion.a>
-                    <motion.a
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      href="#"
+                      <FiExternalLink className="w-5 h-5" />
+                    </a>
+                    <a
+                      href={project.link || '#'}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 dark:bg-gray-800 
-                               text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-200 
-                               dark:hover:bg-gray-700 transition-colors text-xs"
+                      className={`p-2 rounded-full transition-all duration-200 ${
+                        project.link 
+                          ? 'bg-gray-800 text-white hover:bg-gray-900' 
+                          : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                      }`}
+                      onClick={e => !project.link && e.preventDefault()}
                     >
-                      <FiGithub className="w-3.5 h-3.5" />
-                      Source
-                    </motion.a>
+                      <FiGithub className="w-5 h-5" />
+                    </a>
                   </div>
                 </motion.div>
               </motion.div>
@@ -385,7 +381,7 @@ const ProjectDetails = ({ project, isOpen, onClose }: ProjectDetailsProps) => {
                     >
                       <AnimatedPattern />
                       <div className="relative z-10">
-                        <h3 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-6 flex items-center gap-2">
+                        <h3 className="text-xl font-semibold text-gray-800 mb-6 flex items-center gap-2">
                           <FiCode className="w-6 h-6" />
                           Tech Stack
                         </h3>
