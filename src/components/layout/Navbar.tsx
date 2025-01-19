@@ -44,7 +44,7 @@ const Navbar: React.FC = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
       className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg shadow-lg' : 'bg-transparent'
+        isScrolled ? 'bg-white/80 backdrop-blur-sm' : 'bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -65,8 +65,8 @@ const Navbar: React.FC = () => {
                 }}
                 className={`relative px-1 py-2 text-sm font-medium transition-colors ${
                   isActive(path)
-                    ? 'text-indigo-600 dark:text-indigo-400'
-                    : 'text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400'
+                    ? 'text-indigo-600'
+                    : 'text-gray-600 hover:text-indigo-600'
                 }`}
               >
                 {label}
@@ -84,7 +84,7 @@ const Navbar: React.FC = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-lg text-gray-600 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400"
+            className="md:hidden p-2 rounded-lg text-gray-600 bg-white/80"
           >
             {isOpen ? <FiX className="w-6 h-6" /> : <FiMenu className="w-6 h-6" />}
           </button>
@@ -97,7 +97,7 @@ const Navbar: React.FC = () => {
         animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
         transition={{ duration: 0.3 }}
         className={`md:hidden overflow-hidden ${
-          isScrolled ? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg' : 'bg-white dark:bg-gray-900'
+          isScrolled ? 'bg-white/95 backdrop-blur-sm' : 'bg-white/90'
         }`}
       >
         <div className="px-4 py-2 space-y-1">
@@ -106,13 +106,13 @@ const Navbar: React.FC = () => {
               key={path}
               to={path}
               onClick={() => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
                 setIsOpen(false);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
               className={`block px-3 py-2 rounded-lg text-base font-medium transition-colors ${
                 isActive(path)
-                  ? 'bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400'
-                  : 'text-gray-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-800/50'
+                  ? 'bg-indigo-50/90 text-indigo-600'
+                  : 'text-gray-700 hover:bg-gray-50/90'
               }`}
             >
               {label}
