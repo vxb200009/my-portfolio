@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import Layout from './components/layout/Layout'
 import Home from './pages/Home'
@@ -22,7 +22,8 @@ function AppWithRoutes() {
           transition={{ duration: 0.3 }}
         >
           <Routes location={location}>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home />} />'
+            <Route path="*" element={<Navigate to="/" replace />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
